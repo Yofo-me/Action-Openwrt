@@ -43,4 +43,5 @@ then
   sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
 fi
 
-
+sed -i 's/disable-https/enable-https/' package/feeds/packages/netdata/Makefile
+sed -i 's/disable-plugin/enable-plugin/' package/feeds/packages/netdata/Makefile
