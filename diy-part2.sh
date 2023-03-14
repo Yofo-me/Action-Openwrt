@@ -18,7 +18,7 @@ echo $PWD
 [ ! -d sms-tool ] && mkdir sms-tool
 
 
-[ ! -d luci-app-sms ] && mkdirluci-app-sms
+[ ! -d luci-app-sms ] && mkdir luci-app-sms
 
 
 [ ! -d luci-app-passwall2 ] && mkdir luci-app-passwall2
