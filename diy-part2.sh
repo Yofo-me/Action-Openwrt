@@ -17,7 +17,6 @@ cd package/lean/ && git clone -b js https://github.com/gngpp/luci-theme-design.g
 echo $PWD
 [ ! -d sms-tool ] && mkdir sms-tool
 
-[ ! -d luci-app-sms ] && mkdir luci-app-sms
 
 [ ! -d luci-app-passwall2 ] && mkdir luci-app-passwall2
 
@@ -29,25 +28,16 @@ then
     git remote add -f origin https://github.com/kenzok8/small-package.git 
     git config core.sparsecheckout true 
     echo "sms-tool/*" >> .git/info/sparse-checkout 
-    git pull origin main
-    echo "SMS-TOOL: $PWD"
-    cd ..
-fi
-echo $PWD
-
-# for sms-app
-if [  -d luci-app-sms ]
-then
-    cd luci-sms-app  
-    git init 
-    git remote add -f origin https://github.com/kenzok8/small-package.git 
-    git config core.sparsecheckout true 
     echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
     git pull origin main
-     echo "SMS-APP: $PWD"
-    cd ..
+    echo "SMS-TOOL: $PWD"
+   
 fi
+
+cd ..
 echo $PWD
+
+
 
 # for passwall2
 if [  -d luci-app-passwall2 ]
@@ -58,9 +48,10 @@ then
     git config core.sparsecheckout true 
     echo "luci-app-passwall2/*" >> .git/info/sparse-checkout 
     git pull origin main
-     echo "passwall: $PWD"
-    cd ..
+    echo "passwall: $PWD"
+    
 fi
+cd ..
 echo $PWD
 
 # modify passwall2 deps
