@@ -29,6 +29,7 @@ then
     git config core.sparsecheckout true 
     echo "sms-tool/*" >> .git/info/sparse-checkout 
     echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
+    echo "luci-app-passwall2/*" >> .git/info/sparse-checkout
     git pull origin main
     echo "SMS-TOOL: $PWD"
    
@@ -39,23 +40,10 @@ echo $PWD
 
 
 
-# for passwall2
-if [  -d luci-app-passwall2 ]
-then
-    cd luci-app-passwall2 
-    git init 
-    git remote add -f origin https://github.com/kenzok8/small-package.git 
-    git config core.sparsecheckout true 
-    echo "luci-app-passwall2/*" >> .git/info/sparse-checkout 
-    git pull origin main
-    echo "passwall: $PWD"
-    
-fi
-cd ..
-echo $PWD
+
 
 # modify passwall2 deps
-[ -f luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
+[ -f sms-tool/luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' sms-tool/luci-app-passwall2/Makefile
 
 # change dir to source root(openwrt)
 cd ../..
