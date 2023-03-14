@@ -26,25 +26,44 @@ echo $PWD
 # for sms-tool
 if [  -d sms-tool ]
 then
-cd sms-tool && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true && echo "sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+    cd sms-tool  
+    git init 
+    git remote add -f origin https://github.com/kenzok8/small-package.git 
+    git config core.sparsecheckout true 
+    echo "sms-tool/*" >> .git/info/sparse-checkout 
+    git pull origin main
 fi
 
+cd ..
 # for sms-app
 if [  -d luci-app-sms ]
 then
-cd luci-sms-app && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&   echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+    cd luci-sms-app  
+    git init 
+    git remote add -f origin https://github.com/kenzok8/small-package.git 
+    git config core.sparsecheckout true 
+    echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
+    git pull origin main
 fi
 
+cd ..
 # for passwall2
 if [  -d luci-app-passwall2 ]
 then
-cd luci-app-passwall2 && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&  echo "luci-app-passwall2/*" >> .git/info/sparse-checkout && git pull origin main
+    cd luci-app-passwall2 
+    git init 
+    git remote add -f origin https://github.com/kenzok8/small-package.git 
+    git config core.sparsecheckout true 
+    echo "luci-app-passwall2/*" >> .git/info/sparse-checkout 
+    git pull origin main
 fi
 
+cd ..
 # modify passwall2 deps
 [ -f luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
 
-
+# change dir to source root(openwrt)
+cd ../..
 #modify netdata
 [ -f package/feeds/packages/netdata/Makefile ] && sed -i 's/disable-https/enable-https/' package/feeds/packages/netdata/Makefile
 [ -f feeds/packages/admin/netdata/Makefile ] && sed -i 's/disable-plugin/enable-plugin/' feeds/packages/admin/netdata/Makefile
