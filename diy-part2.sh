@@ -17,9 +17,7 @@ cd package/lean/ && git clone -b js https://github.com/gngpp/luci-theme-design.g
 echo $PWD
 [ ! -d sms-tool ] && mkdir sms-tool
 
-
 [ ! -d luci-app-sms ] && mkdir luci-app-sms
-
 
 [ ! -d luci-app-passwall2 ] && mkdir luci-app-passwall2
 
@@ -32,9 +30,11 @@ then
     git config core.sparsecheckout true 
     echo "sms-tool/*" >> .git/info/sparse-checkout 
     git pull origin main
+    echo "SMS-TOOL: $PWD"
+    cd ..
 fi
+echo $PWD
 
-cd ..
 # for sms-app
 if [  -d luci-app-sms ]
 then
@@ -44,9 +44,11 @@ then
     git config core.sparsecheckout true 
     echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
     git pull origin main
+     echo "SMS-APP: $PWD"
+    cd ..
 fi
+echo $PWD
 
-cd ..
 # for passwall2
 if [  -d luci-app-passwall2 ]
 then
@@ -56,9 +58,11 @@ then
     git config core.sparsecheckout true 
     echo "luci-app-passwall2/*" >> .git/info/sparse-checkout 
     git pull origin main
+     echo "passwall: $PWD"
+    cd ..
 fi
+echo $PWD
 
-cd ..
 # modify passwall2 deps
 [ -f luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
 
