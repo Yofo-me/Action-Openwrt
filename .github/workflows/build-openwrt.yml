@@ -46,7 +46,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-       mkdir -p ./workdir
+       [ ! -d ./workdir ] && mkdir -p ./workdir
        chown $USER:$GROUPS ./workdir
 
     - name: Clone source code
