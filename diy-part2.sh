@@ -14,6 +14,7 @@
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
 cd package/lean/ && git clone -b js https://github.com/gngpp/luci-theme-design.git
+echo $PWD
 if [ ! -d package/lean/sms-tool ]
 then
   mkdir package/lean/sms-tool
