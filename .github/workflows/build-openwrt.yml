@@ -35,7 +35,7 @@ env:
 
 jobs:
   test:
-    runs-on: code-runner
+    runs-on: coding
     #timeout-minutes: 360
 
     steps:
