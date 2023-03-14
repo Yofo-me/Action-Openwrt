@@ -15,35 +15,34 @@ sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
 cd package/lean/ && git clone -b js https://github.com/gngpp/luci-theme-design.git
 echo $PWD
-[ ! -d package/lean/sms-tool ] && mkdir package/lean/sms-tool
+[ ! -d sms-tool ] && mkdir sms-tool
 
 
-[ ! -d package/lean/luci-app-sms ] && mkdir package/lean/sms-tool
+[ ! -d luci-app-sms ] && mkdirluci-app-sms
 
 
-[ ! -d package/lean/luci-app-passwall2 ] && mkdir package/lean/sms-tool
-
+[ ! -d luci-app-passwall2 ] && mkdir luci-app-passwall2
 
 # for sms-tool
-if [  -d package/lean/sms-tool ]
+if [  -d sms-tool ]
 then
-cd package/lean/sms-tool && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true && echo "sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+cd sms-tool && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true && echo "sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
 fi
 
 # for sms-app
-if [  -d package/lean/luci-app-sms ]
+if [  -d luci-app-sms ]
 then
-cd package/lean/luci-sms-app && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&   echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+cd luci-sms-app && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&   echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
 fi
 
 # for passwall2
-if [  -d package/lean/luci-app-passwall2 ]
+if [  -d luci-app-passwall2 ]
 then
-cd package/lean/luci-app-passwall2 && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&  echo "luci-app-passwall2/*" >> .git/info/sparse-checkout && git pull origin main
+cd luci-app-passwall2 && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&  echo "luci-app-passwall2/*" >> .git/info/sparse-checkout && git pull origin main
 fi
 
 # modify passwall2 deps
-[ -f package/lean/luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
+[ -f luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
 
 
 #modify netdata
