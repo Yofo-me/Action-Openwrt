@@ -30,18 +30,34 @@ then
 fi
 
 # for sms-tool
+if [  -d package/lean/sms-tool ]
+then
 cd package/lean/sms-tool && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true && echo "sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+fi
 
 # for sms-app
+if [  -d package/lean/luci-app-sms ]
+then
 cd package/lean/luci-sms-app && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&   echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout && git pull origin main
+fi
 
 # for passwall2
+if [  -d package/lean/luci-app-passwall2 ]
+then
 cd package/lean/luci-app-passwall2 && git init && git remote add -f origin https://github.com/kenzok8/small-package.git && git config core.sparsecheckout true &&  echo "luci-app-passwall2/*" >> .git/info/sparse-checkout && git pull origin main
+fi
+
 # modify passwall2 deps
 if [ -f package/lean/luci-app-passwall2/Makefile ]
 then
   sed -i '31s/xray-core/v2ray-core/' package/lean/luci-app-passwall2/Makefile
 fi
 
+#modify netdata
 sed -i 's/disable-https/enable-https/' package/feeds/packages/netdata/Makefile
 sed -i 's/disable-plugin/enable-plugin/' package/feeds/packages/netdata/Makefile
+
+#modify ttyd to enable https
+[ -f feeds/packages/utils/ttyd/Makefile ] && $(sed -i 's/PKG_VERSION:=1\.6\.3/PKG_VERSION:=1\.7\.3/' feeds/packages/utils/ttyd/Makefile && sed -i 's/PKG_HASH:=.*/PKG_HASH:=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855/' feeds/packages/utils/ttyd/Makefile) || echo 'Files not Found'
+
+[ -f package/feeds/packages/ttyd/Makefile ] && $(sed -i 's/PKG_VERSION:=1\.6\.3/PKG_VERSION:=1\.7\.3/' package/feeds/packages/ttyd/Makefile && sed -i 's/PKG_HASH:=.*/PKG_HASH:=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855/' package/feeds/packages/ttyd/Makefile) || echo 'Files not Found'
