@@ -35,7 +35,7 @@ env:
 
 jobs:
   test:
-    runs-on: vmi957003
+    runs-on: code-runner
     #timeout-minutes: 360
 
     steps:
