@@ -34,8 +34,9 @@ env:
   TZ: Asia/Shanghai
 
 jobs:
-  build:
-    runs-on: self-hosted
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
 
     steps:
     - name: Checkout
