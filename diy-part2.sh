@@ -9,9 +9,9 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
-SoucrePath=/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt
+SoucrePath="/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt"
 
-[ $PWD = $SourcePath ] && echo true || echo false
+[ "$PWD" = "$SourcePath" ] && echo true || echo false
 
 # Modify default IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
@@ -23,29 +23,36 @@ echo $PWD
 
 
 
-# for sms-tool
+# for small-package
 if [  -d small-package ]
 then
     cd small-package  
-    git init 
-    git remote add -f origin https://github.com/kenzok8/small-package.git 
-    git config core.sparsecheckout true 
-    echo "sms-tool/*" >> .git/info/sparse-checkout 
-    echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
-    echo "luci-app-passwall2/*" >> .git/info/sparse-checkout
-    echo "luci-app-codeserver/*" >> .git/info/sparse-checkout
-    echo "luci-lib-taskd/*" >> .git/info/sparse-checkout
-    echo "naiveproxy/*" >> .git/info/sparse-checkout
-    echo "luci-app-iperf/*" >> .git/info/sparse-checkout
-    echo "luci-app-chinesesubfinder/*" >> .git/info/sparse-checkout
-    git pull origin main
-    echo "small-package: $PWD"
+    if [ ! -d .git ] || [ ! -f .git ] || [ "`ls -A .git`"="" ]
+    then
+        git init 
+        git remote add -f origin https://github.com/kenzok8/small-package.git 
+        git config core.sparsecheckout true 
+        echo "sms-tool/*" >> .git/info/sparse-checkout 
+        echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
+        echo "luci-app-passwall2/*" >> .git/info/sparse-checkout
+        echo "luci-app-codeserver/*" >> .git/info/sparse-checkout
+        echo "luci-lib-taskd/*" >> .git/info/sparse-checkout
+        echo "naiveproxy/*" >> .git/info/sparse-checkout
+        echo "luci-app-iperf/*" >> .git/info/sparse-checkout
+        echo "luci-app-chinesesubfinder/*" >> .git/info/sparse-checkout
+        git pull origin main
+    else
+        git pull origin main
+    fi
+    
+    # echo current path
+    echo "current path is: $PWD"
     
 fi
 
 cd ..
-echo $PWD
-if [ $PWD == '/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt/package/lean' ]
+echo "current path is: $PWD"
+if [ "$PWD" = "/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt/package/lean" ]
 then
     git clone https://github.com/kenzok8/small.git
     ../../scripts/feeds update  -a && ../../scripts/feeds install  -a
