@@ -50,6 +50,10 @@ then
         echo "webdav2/*" >> .git/info/sparse-checkout
         echo "wxbase/*" >> .git/info/sparse-checkout
         echo "quickjspp/*" >> .git/info/sparse-checkout
+        echo "libcron/*" >> .git/info/sparse-checkout
+        $ echo "jpcre2/*" >> .git/info/sparse-checkout
+        echo "rapidjson/*" >> .git/info/sparse-checkout
+        echo "toml11/*" >> .git/info/sparse-checkout
         git pull origin main
     else
         git pull origin main
