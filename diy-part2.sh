@@ -48,7 +48,7 @@ echo $PWD
 if [ $PWD == '/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt/package/lean' ]
 then
     git clone https://github.com/kenzok8/small.git
-    ../../scripts/feeds update  -a && ../../scripts/feeds update  -a
+    ../../scripts/feeds update  -a && ../../scripts/feeds install  -a
 fi
     
 
