@@ -9,19 +9,22 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
+SoucrePath='/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt'
+
+[ $PWD = $SourcePath ] && echo true || echo false
 
 # Modify default IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
 cd package/lean/ && git clone -b js https://github.com/gngpp/luci-theme-design.git
 echo $PWD
-[ ! -d sms-tool ] && mkdir sms-tool
+[ ! -d small-package ] && mkdir small-package
 
 
-[ ! -d luci-app-passwall2 ] && mkdir luci-app-passwall2
+
 
 # for sms-tool
-if [  -d sms-tool ]
+if [  -d small-package ]
 then
     cd sms-tool  
     git init 
@@ -30,20 +33,32 @@ then
     echo "sms-tool/*" >> .git/info/sparse-checkout 
     echo "luci-app-sms-tool/*" >> .git/info/sparse-checkout
     echo "luci-app-passwall2/*" >> .git/info/sparse-checkout
+    echo "luci-app-codeserver/*" >> .git/info/sparse-checkout
+    echo "luci-lib-taskd/*" >> .git/info/sparse-checkout
+    echo "naiveproxy/*" >> .git/info/sparse-checkout
+    echo "luci-app-iperf/*" >> .git/info/sparse-checkout
+    echo "luci-app-chinesesubfinder/*" >> .git/info/sparse-checkout
     git pull origin main
-    echo "SMS-TOOL: $PWD"
-   
+    echo "small-package: $PWD"
+    
 fi
 
 cd ..
 echo $PWD
-
+if [ $PWD == '/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt/package/lean' ]
+then
+    git clone https://github.com/kenzok8/small.git
+    ../../scripts/feeds update  -a && ../../scripts/feeds update  -a
+fi
+    
 
 
 
 
 # modify passwall2 deps
-[ -f sms-tool/luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' sms-tool/luci-app-passwall2/Makefile
+[ -f small-package/luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' small-package/luci-app-passwall2/Makefile
+[ -f small-package/luci-app-iperf/Makefile ] && sed -i '9s/LUCI_DEPENDS:=+iperf3-ssl/LUCI_DEPENDS:=+iperf3/' small-package/luci-app-iperf/Makefile
+
 
 # change dir to source root(openwrt)
 cd ../..
