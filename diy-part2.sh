@@ -9,7 +9,7 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
-SoucrePath='/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt'
+SoucrePath=/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt
 
 [ $PWD = $SourcePath ] && echo true || echo false
 
