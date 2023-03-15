@@ -40,6 +40,16 @@ then
         echo "naiveproxy/*" >> .git/info/sparse-checkout
         echo "luci-app-iperf/*" >> .git/info/sparse-checkout
         echo "luci-app-chinesesubfinder/*" >> .git/info/sparse-checkout
+        echo "luci-lib-xterm/*" >> .git/info/sparse-checkout
+        echo "taskd/*" >> .git/info/sparse-checkout
+        echo "speedtestcli/*" >> .git/info/sparse-checkout
+        echo "subconverter/*" >> .git/info/sparse-checkout
+        echo "sub-web/*" >> .git/info/sparse-checkout
+        echo "speedtest-web/*" >> .git/info/sparse-checkout
+        echo "webd/*" >> .git/info/sparse-checkout
+        echo "webdav2/*" >> .git/info/sparse-checkout
+        echo "wxbase/*" >> .git/info/sparse-checkout
+        echo "quickjspp/*" >> .git/info/sparse-checkout
         git pull origin main
     else
         git pull origin main
