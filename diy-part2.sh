@@ -26,7 +26,7 @@ echo $PWD
 # for sms-tool
 if [  -d small-package ]
 then
-    cd sms-tool  
+    cd small-package  
     git init 
     git remote add -f origin https://github.com/kenzok8/small-package.git 
     git config core.sparsecheckout true 
