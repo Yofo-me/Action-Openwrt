@@ -90,3 +90,7 @@ cd ../..
 #modify ttyd to enable https
 [ -f feeds/packages/utils/ttyd/Makefile ] && $(sed -i 's/PKG_VERSION:=1\.6\.3/PKG_VERSION:=1\.7\.3/' feeds/packages/utils/ttyd/Makefile && sed -i 's/PKG_HASH:=.*/PKG_HASH:=c9cf5eece52d27c5d728000f11315d36cb400c6948d1964a34a7eae74b454099/' feeds/packages/utils/ttyd/Makefile) 
 [ -f package/feeds/packages/ttyd/Makefile ] && $(sed -i 's/PKG_VERSION:=1\.6\.3/PKG_VERSION:=1\.7\.3/' package/feeds/packages/ttyd/Makefile && sed -i 's/PKG_HASH:=.*/PKG_HASH:=c9cf5eece52d27c5d728000f11315d36cb400c6948d1964a34a7eae74b454099/' package/feeds/packages/ttyd/Makefile) 
+
+[ -d  feeds/packages/utils/ttyd/patches ] && rm -rf feeds/packages/utils/ttyd/patches
+
+[ -d package/feeds/packages/ttyd/patches ] && rm -rf package/feeds/packages/ttyd/patches
