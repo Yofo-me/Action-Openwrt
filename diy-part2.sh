@@ -9,9 +9,8 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
-SoucrePath="/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt"
 
-[ "$PWD" = "$SourcePath" ] && echo true || echo false
+
 
 # Modify default IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
@@ -65,12 +64,11 @@ then
 fi
 
 cd ..
-echo "current path is: $PWD"
-if [ "$PWD" = "/home/code-runner/actions-runner/_work/Action-Openwrt/Action-Openwrt/openwrt/package/lean" ]
-then
-    git clone https://github.com/kenzok8/small.git
-    ../../scripts/feeds update  -a && ../../scripts/feeds install  -a
-fi
+
+# clone small depends
+git clone https://github.com/kenzok8/small.git
+../../scripts/feeds update  -a && ../../scripts/feeds install  -a
+
     
 
 
