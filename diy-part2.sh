@@ -28,7 +28,8 @@ then
     cd small-package  
     if [ ! -d .git ] || [ ! -f .git ] || [ "`ls -A .git`"="" ]
     then
-        git init 
+        echo "starting to clone small package"
+        git init
         git remote add -f origin https://github.com/kenzok8/small-package.git 
         git config core.sparsecheckout true 
         echo "sms-tool/*" >> .git/info/sparse-checkout 
@@ -59,20 +60,22 @@ then
     fi
     
     # echo current path
-    echo "current path is: $PWD"
+    echo "Finished, current path is: $PWD"
     
 fi
 
 cd ..
 
 # clone small depends
+echo "start to clone small deps"
 git clone https://github.com/kenzok8/small.git
+echo "Finished clone steps. Now update index."
 ../../scripts/feeds update  -a && ../../scripts/feeds install  -a
 
     
 
 
-
+echo "Index updated. Now modifying small package."
 
 # modify passwall2 deps
 [ -f small-package/luci-app-passwall2/Makefile ] && sed -i '31s/xray-core/v2ray-core/' small-package/luci-app-passwall2/Makefile
@@ -92,3 +95,5 @@ cd ../..
 [ -d  feeds/packages/utils/ttyd/patches ] && rm -rf feeds/packages/utils/ttyd/patches
 
 [ -d package/feeds/packages/ttyd/patches ] && rm -rf package/feeds/packages/ttyd/patches
+
+ echo "Finished modified."
